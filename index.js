@@ -197,109 +197,6 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
     handleMessages(messages, sender);
     break;
 
-    case "rate.action":
-    firstRateFunction();
-    async function firstRateFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondRateFunction();
-    }
-    async function secondRateFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'PRICE_SECOND_EVENT');
-    }
-    break;
-
-    case "where.action":
-    firstWhereFunction();
-    async function firstWhereFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondWhereFunction();
-    }
-    async function secondWhereFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'WHERE_SECOND_EVENT');
-    }
-    break;
-
-    case "ongoingdeals.action":
-    firstOngoingFunction();
-    async function firstOngoingFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondOngoingFunction();
-    }
-    async function secondOngoingFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'ONGOING_SECOND_EVENT');
-    }
-    break;
-
-    case "data.packs.action":
-    firstDataFunction();
-    async function firstDataFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondDataFunction();
-    }
-    async function secondDataFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'DATA_SECOND_EVENT');
-    }
-    break;
-
-    case "others.action":
-    firstOtherFunction();
-    async function firstOtherFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondOtherFunction();
-    }
-    async function secondOtherFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'OTHERS_SECOND_EVENT');
-    }
-    break;
-
-    case "start.again.action":
-    firstAgainFunction();
-    async function firstAgainFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondAgainFunction();
-    }
-    async function secondAgainFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'AGAIN_SECOND_EVENT');
-    }
-    break;
-
-    case "reload.action":
-    firstReloadFunction();
-    async function firstReloadFunction(){
-      sendTypingOn(sender);
-      handleMessages(messages, sender);
-      await secondReloadFunction();
-    }
-    async function secondReloadFunction(){
-      await resolveAfterXSeconds(3);
-      sendTypingOn(sender);
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, sender, 'RELOAD_SECOND_EVENT');
-    }
-    break;
-
-    case "talk.human":
-    passThreadControl(sender);
-    sendTextMessage(sender, "Transferring to Human Agent. Please Wait!");
-    break;
-
     default:
     handleMessages(messages, sender);
   }
@@ -690,51 +587,7 @@ function sendReceiptMessage(recipientId, recipient_name, currency, payment_metho
       case 'GET_STARTED':
       greetUserText(senderID);
       break;
-      case 'ABOUT':
-      //get feedback with new jobs
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'ABOUT_EVENT');
-      break;
-      //this case is from the first welcome
-      case 'PRICE':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'PRICE_EVENT');
-      break;
 
-      case 'WHERE_TO_GET':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'WHERE_EVENT');
-      break;
-      case 'ONGOING_DEALS':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'ONGOING_DEALS_EVENT');
-      break;
-      case 'DATA_PACKS':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'DATA_PACKS_EVENT');
-      break;
-      case 'OTHERS':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'OTHERS_EVENT');
-      break;
-      case 'CHAT_WITH_AGENT':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'CHAT_WITH_AGENT_EVENT');
-      break;
-      case 'RELOAD':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'RELOAD_EVENT');
-      break;
-      case 'START_AGAIN':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'START_AGAIN_EVENT');
-      break;
-
-      case 'BUY_SIM_BANGLA':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'BANGLA_BUY_EVENT');
-      break;
-      case 'ABOUT_BANGLA':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'BANGLA_ABOUT_EVENT', {'bangla_about_what': 'স্কিটটো'});
-      break;
-      case 'BANGLA_SIM_BUYING_OPTIONS':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'BANGLA_BUYOPTIONS_EVENT');
-      break;
-      case 'BANGLA_SIM_RATES':
-      sendEventToDialogFlow(sessionIds, handleDialogFlowResponse, senderID, 'BANGLA_SIMRATES_EVENT');
-      break;
-      case 'NO_PAYLOAD_BANGLA':
-      sendTextMessage(senderID, "আপনাকে যেতে দেখে দুঃখিত :(। আপনার প্রশ্নের সন্ধান না হলে দয়া করে লাইভ এজেন্টের সাথে সংযোগ করতে 'চ্যাট উইথ এজেন্ট' টাইপ করুন। স্কিটোর সাথে থাকার জন্য আপনাকে আবার ধন্যবাদ।");
       default:
       //unindentified payload
       sendTextMessage(senderID, "I'm not sure what you want. Can you be more specific?");
@@ -771,10 +624,10 @@ function sendReceiptMessage(recipientId, recipient_name, currency, payment_metho
     }
 
     if (user) {
-      let responseText = "হ্যালো " + user.first_name + "! আমি স্কিটোর ভার্চুয়াল সহকারী। বাংলায় কথা বলতে 'হ্যালো' লিখুন। \nHello " + user.first_name + "! I am the virtual assistant of Skitto. To start the conversation in English, type 'Hello'."
+      let responseText = "Hello " + user.first_name + "! I am the virtual assistant of Skitto. To start the conversation in English, type 'Hello'."
       sendTextMessage(userID, responseText);
     } else {
-      let responseText = "হ্যালো! আমি স্কিটোর ভার্চুয়াল সহকারী। বাংলায় কথা বলতে 'হ্যালো' লিখুন। \nHello! I am the virtual assistant of Skitto. To start the conversation in English, type 'Hello'."
+      let responseText = "Hello! I am the virtual assistant of Skitto. To start the conversation in English, type 'Hello'."
       sendTextMessage(userID, responseText);
     }
 
